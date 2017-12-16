@@ -1,0 +1,181 @@
+//ACSLland
+//Zac Thamer
+//Period 4A
+// 12 16 14
+import java.util.Scanner;
+import java.text.NumberFormat;
+//import java.text.Parse;
+public class ACSLland 
+{
+	public static void main (String[]arg) 
+	{
+		Scanner input = new Scanner(System.in);
+
+		// asks user questions to get input
+		// MILES
+		System.out.println("How many miles per gallon does your vehicle get?");
+		int mileGallon = input.nextInt();
+		//GASOLINE COST
+		System.out.println("How much does it cost for gasoline?");
+		double gasoline = input.nextDouble();
+		//AVERAGE MILES PER HOUR
+		System.out.println("What is the average miles per hour you will be going?");
+		int mileAverage = input.nextInt();
+		// asks for city 5 times
+		int run = 0;
+
+		Scanner reader;
+		do
+		{
+			run = run +1;	
+			reader = new Scanner(System.in);
+			// STARTING CITY
+			System.out.println("What city are you starting from? (A,B,C,D,E,F,G)");
+			char destinationStart = reader.next(".").charAt(0);
+			// ENDING CITY
+			System.out.println("What city are you going to? (A,B,C,D,E,F,G)");
+			char destinationEnd = reader.next(".").charAt(0);
+			// Gives value to each city interval
+			int totalDistance = 0;
+			int destAB = 450;
+			int destBC = 140;
+			int destCD = 120;
+			int destDE = 320;
+			int destEF = 250;
+			int destFG = 80;
+
+			if (destinationStart > destinationEnd)
+			{
+				// SORT START AND END
+				char temp = destinationEnd;
+				destinationEnd = destinationStart;
+				destinationStart = temp;
+			}
+			// determines the total distance for each situation
+
+			// for DISTANCE A
+			if (destinationStart == 'A')
+			{
+				if (destinationEnd == 'B')
+					totalDistance = destAB;
+
+				if (destinationEnd == 'C')
+					totalDistance = destAB + destBC;
+
+				if (destinationEnd == 'D')
+					totalDistance = destAB + destBC + destCD;
+
+				if  (destinationEnd == 'E')
+					totalDistance = destAB + destBC + destCD + destDE;
+
+				if (destinationEnd == 'F')
+					totalDistance = destAB + destBC + destCD + destDE + destEF;
+
+				if (destinationEnd == 'G')
+					totalDistance = destAB + destBC + destCD + destDE + destEF + destFG;
+
+			}
+
+			//  for DISTANCE B
+			if (destinationStart == 'B')
+			{
+
+				if (destinationEnd == 'C')
+					totalDistance = destBC;
+
+				if (destinationEnd == 'D')
+					totalDistance = destBC + destCD;
+
+				if  (destinationEnd == 'E')
+					totalDistance = destBC + destCD + destDE;
+
+				if (destinationEnd == 'F')
+					totalDistance = destBC + destCD + destDE + destEF;
+
+				if (destinationEnd == 'G')
+					totalDistance = destBC + destCD + destDE + destEF + destFG;
+
+			}
+
+			// for DISTANCE C
+			if (destinationStart == 'C')
+			{
+
+				if (destinationEnd == 'D')
+					totalDistance =destCD;
+
+				if  (destinationEnd == 'E')
+					totalDistance = destCD + destDE;
+
+				if (destinationEnd == 'F')
+					totalDistance = destCD + destDE + destEF;
+
+				if (destinationEnd == 'G')
+					totalDistance = destCD + destDE + destEF + destFG;
+
+			}
+
+			// for DISTANCE D
+			if (destinationStart == 'D')
+			{
+
+				if  (destinationEnd == 'E')
+					totalDistance = destDE;
+
+				if (destinationEnd == 'F')
+					totalDistance =  destDE + destEF;
+
+				if (destinationEnd == 'G')
+					totalDistance =  destDE + destEF + destFG;
+
+			}
+
+			// for DISTANCE E
+			if (destinationStart == 'E')
+			{
+
+				if (destinationEnd == 'F')
+					totalDistance = destEF;
+
+				if (destinationEnd == 'G')
+					totalDistance =  destEF + destFG;
+
+			}
+
+			// for DISTANCE F
+			if (destinationStart == 'F')
+			{
+
+				if (destinationEnd == 'G')
+					totalDistance =  destFG;
+
+			}
+
+			// calculates total number of hours
+			double totalTime = (double)totalDistance/mileAverage;
+			// calculates total cost
+			double totalCost = ((double)totalDistance/mileGallon)*gasoline;
+			// puts cost into $ format
+			NumberFormat money = NumberFormat.getCurrencyInstance();
+			// puts time into correct format
+			int hoursInt = (int)totalTime;	// round down to integer
+			int totalMins = (int)(((totalTime - hoursInt) * 60.0)+0.5);	// get fractional hours and calculates mins
+
+			// output
+			System.out.println(totalDistance+", " +hoursInt+ ":"+totalMins+", "+ money.format(totalCost));
+
+
+		}
+		while (run <5);
+		//closes input
+		input.close();
+		//close reader
+		reader.close();
+
+
+
+	}
+
+}
+
+
